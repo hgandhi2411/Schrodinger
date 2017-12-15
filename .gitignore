@@ -1,0 +1,10 @@
+*~
+*.DS_store
+*.pyc
+.vscode/*
+.cache/*
+*.egg-info
+.coverage
+
+#Sphinx
+docs/build
