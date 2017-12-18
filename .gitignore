@@ -7,9 +7,10 @@
 .coverage
 dist/
 */output.txt
+test_output.txt
+*/test_output.txt
 
 build
 
-*/test_output.txt
 #Sphinx
 docs/build
