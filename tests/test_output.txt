@@ -1,2 +1,0 @@
-basis set coefficients are:
-a1 = 1.0000a2 = 2.0000a3 = 3.0000a4 = 4.0000

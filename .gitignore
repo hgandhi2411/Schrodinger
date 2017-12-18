@@ -8,5 +8,6 @@
 
 build
 
+*/test_output.txt
 #Sphinx
 docs/build

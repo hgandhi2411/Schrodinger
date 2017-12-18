@@ -68,23 +68,19 @@ class Test_Schrodinger(unittest.TestCase):
         print(eigenvalues, eigenvectors)
         self.assertEqual(eigenvalues.all(), np.array([1,1,1]).all())
         self.assertEqual(eigenvectors.all(), np.array([[1,0,0], [0,1,0], [0,0,1]]).all())
-'''
+
+
     def test_write_output(self):
-        # Tests if the output file is written correctly
+        '''Tests if the output file is written correctly'''
         test_string = [1, 2, 3, 4]
-        test_string2 = '''
-        # basis set coefficients are:
-        # a1 = 1.0000
-        # a2 = 2.0000
-        # a3 = 3.0000
-        # a4 = 4.0000
-        '''
-        out_file = './tests/test_output.txt'
+        test_string2 = '''basis set coefficients are:\na1 = 1.0000\na2 = 2.0000\na3 = 3.0000\na4 = 4.0000\n'''
+        test_file = io.StringIO(test_string2)
+        test_data = list(test_file.readlines())
+
+        out_file = './test_output.txt'
         SEq.write_output(out_file, test_string)
-        f = open(out_file, 'r')
-        test_data = list(f.readlines())
-        print(test_string2[1])
-        print(test_data)
-        f.close()
-        self.assertEqual(test_data, test_string2)
-'''    
+        f1 = open(out_file, 'r')
+        test_data1 = list(f1.readlines())
+        f1.close()
+
+        self.assertEqual(test_data, test_data1)
