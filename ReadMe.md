@@ -30,7 +30,7 @@ pip install Schrodinger
 ```
 ## Features
 
-This solver can solve the schrodinger equation for basis sets from Legendre polynomials or Fourier series.
+This solver can solve the Schrödinger equation for basis sets from Legendre polynomials or Fourier series.
 ## Usage and Examples
 
 After installation, you can use the entry point 'solver' to start the program and get the basis set coefficients.The following flags/keywords can be used to change the parameters through the command line.
@@ -54,10 +54,14 @@ An example of execution is:
 ```
 ..\Schrodinger> $ solver -y x**2+2*x -ch fourier -s 5
 ```
-and in the output you see:
+and in the output you will see:
 ```
 Started!
 
 Done! Please see the output file for results.
 ```
 The output file contains the desired basis set coefficients.
+
+
+## TODO
+* Be able to handle other basis sets.
