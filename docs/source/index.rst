@@ -10,7 +10,10 @@ Welcome to Schrodinger Equation's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+.. automodule:: SEq
 
+.. automodule:: SEq.seq
+    :members:
 
 Indices and tables
 ==================

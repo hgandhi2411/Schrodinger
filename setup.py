@@ -9,5 +9,9 @@ setup(name='Schrodinger',
       author='Heta Gandhi',
       author_email='hgandhi@ur.rochester.edu',
       packages=['SEq'],
+      entry_points = 
+      {
+            'console_scripts': ['solve=SEq.seq:main']
+      }
       )
      
