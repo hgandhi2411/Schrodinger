@@ -9,7 +9,7 @@ def create_parser():
     parser = argparse.ArgumentParser(description = "Inputs to the Schrodinger Equation solver")
     parser.add_argument('-V0', '--potential', nargs = '?', type = float, default = 2, help = 'Constant potential energy, default = 0.1')
     parser.add_argument('-c', '--constant', nargs = '?', type = float, default = 1, help = 'Constant multiplier for the laplacian term of the hamiltonian, default = 1')
-    parser.add_argument('-s', '--basis_size', nargs = '?', type = float, default = 3, help = 'Size of the basis set, default = 3')
+    parser.add_argument('-s', '--basis_size', nargs = '?', type = int, default = 10, help = 'Size of the basis set, default = 3')
     parser.add_argument('-ch', '--basis_choice', nargs = '?', type = str, default = 'Legendre', choices = ['Legendre', 'legendre', 'Fourier', 'fourier'], help = 'Choice of basis set - Fourier or Legendre, default = Legendre')
     parser.add_argument('-d', '--domain', nargs = '?', type = tuple, default = (-1, 1), help = 'Domain for the basis set, default = [-1, 1]. Please input a tuple.')
     parser.add_argument('-y', '--wave_function', nargs = '?', type = str, default = 'cos(x)', help = 'Specify a guess for the wave function, default = cos(x). Expression for wave function must be written as a python-formatted mathematical string.')
@@ -106,6 +106,7 @@ def hamiltonian(ch, x, y, c, V0, basis_set):
         del2_basis = np.append(del2_basis, [0,0])
     elif(ch == 'Fourier' or ch == 'fourier'):
         del2_basis = np.gradient(np.gradient(y, x)) #np.gradient uses central difference method to give the derivative.
+    #print(del2_basis.shape)
     h = [-c * del2_basis + V0 * np.array(basis_set)]
     H = np.matmul(np.transpose([basis_set]), h) # (nx1)x(1xn) = (nxn) matrix multiplication
     return H
@@ -148,18 +149,21 @@ def main(): #pragma: no cover
     parser = create_parser()
     args = parser.parse_args()
     
+    print('Started!')
     V0 = args.potential
     c = args.constant
     basis_size = args.basis_size
     choice = args.basis_choice
     (lower_lim, upper_lim) = args.domain
     output_file = args.output_file
-
-    x = np.linspace(lower_lim, upper_lim, 100) # 100 points in the domain
+    #print(args.wave_function)
+    x = np.linspace(lower_lim, upper_lim, basis_size) 
     wave_func = wave_function(args.wave_function, x)
+    #print(wave_func)
 
-    basis_set = basis_set(ch = choice, x = x, y = wave_func, basis_size = basis_size)
-    H = hamiltonian(ch = choice, x = x, y = wave_func, c = c, V0 = V0, basis_set = basis_set)
+    basis = basis_set(ch = choice, x = x, y = wave_func, basis_size = basis_size)
+    H = hamiltonian(ch = choice, x = x, y = wave_func, c = c, V0 = V0, basis_set = basis)
     coefficients, Energy = eigen(H)
 
     write_output(output_file, coefficients)
+    print('\nDone! Please see the output file for results.')

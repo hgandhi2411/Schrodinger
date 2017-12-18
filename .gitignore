@@ -5,6 +5,8 @@
 .cache/*
 *.egg-info
 .coverage
+dist/
+*/output.txt
 
 build
 
