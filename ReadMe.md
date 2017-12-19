@@ -77,3 +77,4 @@ $ pip install sphinx
 in the command line to install it. 
 ## TODO
 * Be able to handle other basis sets.
+* Documentation with sphinx is a little erroneous. It documents correctly for some functions but not for others. Need to find out why that is and fix that.
