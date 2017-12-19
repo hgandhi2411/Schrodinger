@@ -76,7 +76,7 @@ def fourier_coeff(n, x, y):  #Source: https://stackoverflow.com/questions/425810
     '''
     period = np.amax(x) - np.amin(x)
     c = y*np.exp(-1j*2*n*np.pi*x/period)
-    return c.sum()/c.size
+    return np.sum(c)/float(len(c))
 
 def hamiltonian(ch, x, y, c, V0, basis_set):
     '''Returns the hamiltonian of the given basis set
@@ -105,8 +105,7 @@ def hamiltonian(ch, x, y, c, V0, basis_set):
         del2_basis = np.polynomial.legendre.legder(basis_set, m = 2)
         del2_basis = np.append(del2_basis, [0,0])
     elif(ch == 'Fourier' or ch == 'fourier'):
-        del2_basis = np.gradient(np.gradient(y, x)) #np.gradient uses central difference method to give the derivative.
-    #print(del2_basis.shape)
+        del2_basis = np.gradient(np.gradient(basis_set)) #np.gradient uses central difference method to give the derivative.
     h = [-c * del2_basis + V0 * np.array(basis_set)]
     H = np.matmul(np.transpose([basis_set]), h) # (nx1)x(1xn) = (nxn) matrix multiplication
     return H
@@ -142,7 +141,6 @@ def write_output(out_file, output):
     f.write('basis set coefficients are:\n')
     for i, n in enumerate(output):
         f.write('a{} = {:.4f}\n'.format(i+1, n))
-    #f.write('\n')
     f.close()
 
 def main(): #pragma: no cover
@@ -156,11 +154,10 @@ def main(): #pragma: no cover
     choice = args.basis_choice
     (lower_lim, upper_lim) = args.domain
     output_file = args.output_file
-    #print(args.wave_function)
-    x = np.linspace(lower_lim, upper_lim, basis_size) 
+    
+    x = np.linspace(lower_lim, upper_lim, 100) 
     wave_func = wave_function(args.wave_function, x)
-    #print(wave_func)
-
+    
     basis = basis_set(ch = choice, x = x, y = wave_func, basis_size = basis_size)
     H = hamiltonian(ch = choice, x = x, y = wave_func, c = c, V0 = V0, basis_set = basis)
     coefficients, Energy = eigen(H)

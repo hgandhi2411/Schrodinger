@@ -53,7 +53,7 @@ After installation, you can use the entry point 'solver' to start the program an
 
 An example of execution is:
 ```
-..\Schrodinger> $ solver -y x**2+2*x -ch fourier -s 5
+..\Schrodinger> $ solver -y x**2+2*x+2 -ch fourier -s 5
 ```
 and in the output you will see:
 ```
