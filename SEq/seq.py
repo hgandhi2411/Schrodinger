@@ -17,7 +17,7 @@ def create_parser():
     return parser
 
 def wave_function(wave_function, x):
-    '''This function evaluates the string-formatted function for given x
+    '''This function evaluates the string-formatted function for given x.
 
     Parameters
     -----
@@ -35,7 +35,8 @@ def wave_function(wave_function, x):
     return y
 
 def basis_set(ch, x, y, basis_size):
-    '''Depending on the user choice, basis set elements are returned
+    '''Depending on the user choice, basis set elements are returned.
+    
     Parameters
     -----
     ch: string
@@ -59,7 +60,7 @@ def basis_set(ch, x, y, basis_size):
     return basis_set
 
 def fourier_coeff(n, x, y):  #Source: https://stackoverflow.com/questions/4258106/how-to-calculate-a-fourier-series-in-numpy
-    '''Fourier coefficient calculation of the nth term
+    '''Fourier coefficient calculation of the nth term.
 
     Parameters
     -----
@@ -79,7 +80,8 @@ def fourier_coeff(n, x, y):  #Source: https://stackoverflow.com/questions/425810
     return np.sum(c)/float(len(c))
 
 def hamiltonian(ch, x, y, c, V0, basis_set):
-    '''Returns the hamiltonian of the given basis set
+    '''Returns the hamiltonian of the given basis set.
+    
     Parameters
     -----
     ch: string
@@ -112,6 +114,7 @@ def hamiltonian(ch, x, y, c, V0, basis_set):
 
 def eigen(matrix):
     '''Calculates and returns the eigenvalues and eigenvectors of the matrix. The eigenvalues correspond to the lowest energy and eigenvectors correspond to the lowest energy state basis set coefficients.
+    
     Parameters
     -----
     matrix: (.., N, N) array
@@ -129,7 +132,8 @@ def eigen(matrix):
     return eigenvalues, eigenvectors
 
 def write_output(out_file, output):
-    '''Write to the output file
+    '''Writes to the output file.
+    
     Parameters
     ----
     out_file: string

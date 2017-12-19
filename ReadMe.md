@@ -35,25 +35,25 @@ This solver can solve the Schrödinger equation for basis sets from Legendre pol
 ## Usage and Examples
 
 After installation, you can use the entry point 'solver' to start the program and get the basis set coefficients.The following flags/keywords can be used to change the parameters through the command line.
-```
--V0, --potential: Specify the potential Vo, default is 2.
 
--c, --constant: The constant multiplied to the laplacian term in the hamiltonian, default is 0.1.
+* -V0, --potential: Specify the potential Vo, default is 2.
 
--ch, --choice: Specify the type of basis set, choose from Legendre or Fourier. Default is legendre.
+* -c, --constant: The constant multiplied to the laplacian term in the hamiltonian, default is 0.1.
 
--s, --basis_size: Select the number of basis set elements to use, default is 10.
+* -ch, --choice: Specify the type of basis set, choose from Legendre or Fourier. Default is legendre.
 
--d, --domain: Select the domain over which the basis set should be used, default is [-1,1].
+* -s, --basis_size: Select the number of basis set elements to use, default is 10.
 
--y, --wave_function: Give the wave function you want to use, default is cos(x). This should be a python-formatted mathematical string.
+* -d, --domain: Select the domain over which the basis set should be used, default is [-1,1].
 
---output_file: Specify the file path to write the output. By default, a file named output.txt is created in the SEq directory.
-```
+* -y, --wave_function: Give the wave function you want to use, default is cos(x). This should be a python-formatted mathematical string.
+
+* --output_file: Specify the file path to write the output. By default, a file named output.txt is created in the SEq directory.
+
 
 An example of execution is:
 ```
-..\Schrodinger> $ solver -y x**2+2*x+2 -ch fourier -s 5
+$ solver -y x**2+2*x+2 -ch fourier -s 5
 ```
 and in the output you will see:
 ```
@@ -63,6 +63,17 @@ Done! Please see the output file for results.
 ```
 The output file contains the desired basis set coefficients.
 
+## Documentation
+This package uses sphinx documentation library. You will need to have sphinx installed to be able to see the documentation by running the following command:
+```
+$ sphinx-build -b html .\docs\source .\docs\build
+```
+After doing this, go to ```docs\build``` directory and open the index.html in your browser.
 
+If you don't have sphinx installed, run
+```
+$ pip install sphinx
+```
+in the command line to install it. 
 ## TODO
 * Be able to handle other basis sets.
